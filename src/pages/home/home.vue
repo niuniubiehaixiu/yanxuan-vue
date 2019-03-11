@@ -50,24 +50,12 @@
         <div class="nav-all">
           <span>全部频道</span>
         </div>
-        <div class="moreCate">
+        <div class="moreCate" v-if="categorys.kingKongModule">
           <a href="javascript:;" class="active">
             <span>推荐</span>
           </a>
-          <a href="javascript:;">
-            <span>居家生活</span>
-          </a>
-          <a href="javascript:;">
-            <span>服装鞋包</span>
-          </a>
-          <a href="javascript:;">
-            <span>美食酒水</span>
-          </a>
-          <a href="javascript:;">
-            <span>个人清洁</span>
-          </a>
-          <a href="javascript:;">
-            <span>母婴亲子</span>
+          <a href="javascript:;" v-for="(kingKong, index) in categorys.kingKongModule.kingKongList" :key="index">
+            <span>{{kingKong.text}}</span>
           </a>
         </div>
       </div>
@@ -114,57 +102,11 @@
         </div>
       </div>
       <!--商品列表-->
-      <div class="shopList">
+      <div class="shopList" v-if="categorys.kingKongModule">
         <ul class="shoplist-item">
-          <li>
-            <img src="http://yanxuan.nosdn.127.net/fede8b110c502ec5799702d5ec824792.png" alt="">
-            <span>居家生活</span>
-          </li>
-          <li>
-            <img class="img" src="http://yanxuan.nosdn.127.net/fb9dde0c1593536c18c8e12b6f49eb17.png"
-                 data-reactid=".0.4.0.0.0.0.$0/=1$0.$1.0.0">
-            <span>服饰鞋包</span>
-          </li>
-          <li>
-            <img class="img" src="http://yanxuan.nosdn.127.net/d916591adea776351e084016335e5820.png"
-                 data-reactid=".0.4.0.0.0.0.$0/=1$0.$2.0.0">
-            <span>美食酒水</span>
-          </li>
-          <li>
-            <img class="img" src="http://yanxuan.nosdn.127.net/6c3bd9d885c818b1f73e497335a68b47.png"
-                 data-reactid=".0.4.0.0.0.0.$0/=1$0.$3.0.0">
-            <span>个护清洁</span>
-          </li>
-          <li>
-            <img class="img" src="http://yanxuan.nosdn.127.net/63682bd2df06963251b2715e20f98a75.png"
-                 data-reactid=".0.4.0.0.0.0.$0/=1$0.$4.0.0">
-
-            <span>限时购</span>
-          </li>
-          <li>
-            <img class="img" src="http://yanxuan.nosdn.127.net/559d2a240ec20b096590a902217009ff.png"
-                 data-reactid=".0.4.0.0.0.0.$0/=1$0.$5.0.0">
-            <span>母婴亲子</span>
-          </li>
-          <li>
-            <img class="img" src="http://yanxuan.nosdn.127.net/23be40a05926faf2f2a81a08a1c53164.png"
-                 data-reactid=".0.4.0.0.0.0.$0/=1$0.$6.0.0">
-            <span>运动旅行</span>
-          </li>
-          <li>
-            <img class="img" src="http://yanxuan.nosdn.127.net/fbca8e1f2948f0c09fc7672c2c125384.png"
-                 data-reactid=".0.4.0.0.0.0.$0/=1$0.$7.0.0">
-            <span>数码家电</span>
-          </li>
-          <li>
-            <img class="img" src="http://yanxuan.nosdn.127.net/e83bd330713b66a8d4e8eb0cefed8996.png"
-                 data-reactid=".0.4.0.0.0.0.$0/=1$0.$8.0.0">
-            <span>礼品特色</span>
-          </li>
-          <li>
-            <img class="img" src="http://yanxuan.nosdn.127.net/51f5a91f10ba745ec68340b98315acf5.png"
-                 data-reactid=".0.4.0.0.0.0.$0/=1$0.$9.0.0">
-            <span>超级会员</span>
+          <li v-for="(kingKong, index) in categorys.kingKongModule.kingKongList" :key="index">
+            <img v-lazy="kingKong.picUrl" alt="">
+            <span>{{kingKong.text}}</span>
           </li>
         </ul>
       </div>

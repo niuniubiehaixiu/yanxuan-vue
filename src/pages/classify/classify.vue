@@ -11,57 +11,38 @@
     <div class="classify-content">
       <div class="content-left">
         <ul class="left-list">
-          <li class="left-list-item active">推荐专区</li>
-          <li class="left-list-item">冬季专区</li>
-          <li class="left-list-item">爆品专区</li>
-          <li class="left-list-item">新品专区</li>
-          <li class="left-list-item">居家专区</li>
-          <li class="left-list-item">服装专区</li>
-          <li class="left-list-item">美食酒水</li>
-          <li class="left-list-item">个人清洁</li>
-          <li class="left-list-item">母婴亲子</li>
-          <li class="left-list-item">运动旅行</li>
-          <li class="left-list-item">数码家电</li>
-          <li class="left-list-item">礼品特色</li>
+          <li class="left-list-item" :class="classify.id === Number($route.query.classifyId) ? 'active' : ''"
+              v-for="(classify,index) in classifyList.categoryL1List" :key="index">
+            <router-link :to="`/classify/classifyList?classifyId=${classify.id}`">
+              {{classify.name}}
+            </router-link>
+          </li>
         </ul>
       </div>
       <div class="content-right">
-        <div class="right-content">
-          <div class="right-content-img">
-            <img src="http://yanxuan.nosdn.127.net/9eb09ecd7fc58151568f4b0b616db1cf.jpg" alt="">
-          </div>
-          <div class="right-content-list">
-            <ul class="list">
-              <li class="ilist-tem" >
-                <img src="http://yanxuan.nosdn.127.net/cee41a60a2d4d06426f863aea2395f19.png?imageView&quality=85&thumbnail=144x144" alt="">
-                <span class="text">每日特惠好货每</span>
-              </li>
-              <li class="ilist-tem" >
-                <img src="http://yanxuan.nosdn.127.net/cee41a60a2d4d06426f863aea2395f19.png?imageView&quality=85&thumbnail=144x144" alt="">
-                <span class="text">每日特惠好货</span>
-              </li>
-              <li class="ilist-tem" >
-                <img src="http://yanxuan.nosdn.127.net/cee41a60a2d4d06426f863aea2395f19.png?imageView&quality=85&thumbnail=144x144" alt="">
-                <span class="text">每日特惠好货</span>
-              </li>
-              <li class="ilist-tem" >
-                <img src="http://yanxuan.nosdn.127.net/cee41a60a2d4d06426f863aea2395f19.png?imageView&quality=85&thumbnail=144x144" alt="">
-                <span class="text">每日特惠好货</span>
-              </li>
-              <li class="ilist-tem" >
-                <img src="http://yanxuan.nosdn.127.net/cee41a60a2d4d06426f863aea2395f19.png?imageView&quality=85&thumbnail=144x144" alt="">
-                <span class="text">每日特惠好货</span>
-              </li>
-            </ul>
-          </div>
-        </div>
+        <router-view/>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-  export default {}
+  import BScroll from 'better-scroll'
+  import {mapState} from 'vuex'
+  export default {
+    mounted(){
+      //调用actions数据
+      this.$store.dispatch('getClassifyList')
+      new BScroll('.content-left',{
+        click:true
+      })
+    },
+    computed:{
+      ...mapState({
+        classifyList: state =>state.classify.classifyList
+      })
+    }
+  }
 </script>
 <style lang="stylus" rel="stylesheet/stylus" scoped>
   #classifyContiner
@@ -69,6 +50,10 @@
     height 100%
     //头部
     .classify-header
+      position fixed
+      top 0
+      left 0
+      z-index 100
       width 100%
       height 88px
       box-sizing border-box
@@ -77,6 +62,7 @@
       justify-content center
       align-items center
       border-bottom 2px solid #eee
+      background #FFF
       .search
         width 90%
         height 56px
@@ -101,6 +87,7 @@
       .content-left
         width 20%
         height 100%
+        margin-top 88px
         .left-list
           display flex
           flex-direction column
@@ -115,7 +102,7 @@
             &.active
               border-left 10px solid #b4282d
 
-      .content-right
+      /*.content-right
         width 80%
         height 100%
         box-sizing border-box
@@ -148,5 +135,5 @@
               -webkit-line-clamp: 2;
               -webkit-box-orient: vertical;
               overflow: hidden;
-              text-overflow: ellipsis
+              text-overflow: ellipsis*/
 </style>

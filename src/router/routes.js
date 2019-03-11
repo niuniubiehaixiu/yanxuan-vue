@@ -1,5 +1,6 @@
 import Home from '../pages/home/home'
 import Classify from '../pages/classify/classify'
+import ClassifyLists from '../pages/classify/classifyLists'
 import Goods from '../pages/goods/goods'
 import Presonal from '../pages/presonal/presonal'
 import Shopcart from '../pages/shopcart/shopcart'
@@ -7,7 +8,7 @@ import Shopcart from '../pages/shopcart/shopcart'
 export default [
   {
     path: '/',
-    redirect:'/home'
+    redirect: '/home'
   },
   {
     path: '/home',
@@ -15,7 +16,15 @@ export default [
   },
   {
     path: '/classify',
-    component: Classify
+    component: Classify,
+    redirect:'/classify/classifyList',
+    children: [
+      {
+        path:'/classify/classifyList',
+        component:ClassifyLists
+      }
+
+    ]
   },
   {
     path: '/goods',

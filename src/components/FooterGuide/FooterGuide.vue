@@ -6,7 +6,7 @@
       </span>
       <span>首页</span>
     </a>
-    <a href="javascript:;" class="guide_item" :class="{on:$route.path==='/classify'}" @click="goto('/classify')">
+    <a href="javascript:;" class="guide_item" :class="{on:$route.path==='/classify/classifyList'}" @click="goto('/classify/classifyList')">
       <span class="item_icon">
         <i class="iconfont iconbingzhuangtu"></i>
       </span>
