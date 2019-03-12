@@ -45,7 +45,9 @@
                 <i class="iconfont icondianzan"></i>
                 <span>0</span>
               </div>
+              <div class="splic"></div>
             </div>
+
           </div>
           <div class="show-right">
             <div class="content"  v-for="(topic,index) in reqshops.topicList" :key="index" v-show="index>=10">
@@ -65,6 +67,7 @@
                 <i class="iconfont icondianzan"></i>
                 <span>0</span>
               </div>
+              <div class="splic"></div>
             </div>
           </div>
         </div>
@@ -195,6 +198,10 @@
               font-size 35px
               margin-left  150px
               color: #7f7f7f;
+          .splic
+            width 98%
+            height 15px
+            background #eee
       .show-right
         width 50%
         height 100%
@@ -224,4 +231,8 @@
               font-size 35px
               margin-left  150px
               color: #7f7f7f;
+          .splic
+            width 98%
+            height 15px
+            background #eee
 </style>

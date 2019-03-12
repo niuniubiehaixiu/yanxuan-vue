@@ -44,7 +44,6 @@
 </script>
 <style lang="stylus" rel="stylesheet/stylus" scoped>
   .footer_guide
-    border-top: 1px solid #d9d9d9
     position fixed
     z-index 100
     left 0
