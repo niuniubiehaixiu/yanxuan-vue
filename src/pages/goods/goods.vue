@@ -1,49 +1,54 @@
 <template>
-    <div id="goodsContiner">
-      <!--头部-->
-      <div class="goods-header">
-        <div class="header-top">
-          <div class="left">
-            <i class="iconfont iconshouye"></i>
-          </div>
-          <div class="center">
-            <span class="text">发现</span>
-            <span class="text1">甄选家</span>
-          </div>
-          <div class="right">
-            <i class="iconfont iconziyuan"></i>
-            <i class="iconfont icongouwuche"></i>
-          </div>
+  <div id="goodsContiner">
+    <!--头部-->
+    <div class="goods-header">
+      <div class="header-top">
+        <div class="left">
+          <i class="iconfont iconshouye"></i>
         </div>
-        <div class="header-bottom">
-          <div class="tab">
-            <div class="tab-item">
-              <router-link to="/goods/tab1" replace>推荐</router-link>
-            </div>
-            <div class="tab-item">
-              <router-link to="/goods/tab2" replace>收纳秘诀</router-link>
-            </div>
-            <div class="tab-item">
-              <router-link to="/goods/tab3" replace>20元好物</router-link>
-            </div>
-            <div class="tab-item">
-              <router-link to="/goods/tab4" replace>晒单</router-link>
-            </div>
-            <div class="tab-item">
-              <router-link to="/goods/tab5" replace>达人</router-link>
-            </div>
-            <div class="tab-item">
-              <router-link to="/goods/tab6" replace>HOME</router-link>
-            </div>
+        <div class="center">
+          <span class="text">发现</span>
+          <span class="text1">甄选家</span>
+        </div>
+        <div class="right">
+          <i class="iconfont iconziyuan"></i>
+          <i class="iconfont icongouwuche"></i>
+        </div>
+      </div>
+      <div class="header-bottom">
+        <div class="tab">
+          <div class="tab-item"
+               :class="{active: +$route.params.id === index}"
+               v-for="(tab, index) in tabs" :key="index">
+            <RouterLink :to="`/goods/tab/${index}`">
+              <span>{{tab.tabName}}</span>
+            </RouterLink>
           </div>
         </div>
       </div>
-      <Split/>
     </div>
+    <Split/>
+    <!--主体内容-->
+    <div class="goods-content">
+      <RouterView/>
+    </div>
+  </div>
 </template>
 
 <script>
-  export default {}
+  import {mapState} from 'vuex'
+
+  export default {
+    mounted () {
+      this.$store.dispatch('getTabs')
+    },
+    computed: {
+      ...mapState({
+        tabs: state => state.goods.tabs
+      })
+    }
+
+  }
 </script>
 <style lang="stylus" rel="stylesheet/stylus" scoped>
   #goodsContiner
@@ -51,8 +56,9 @@
     height 100%
     .goods-header
       width 100%
-      height 150px
+      height 160px
       background #fff
+      position fixed
       .header-top
         width 100%
         height 85px
@@ -60,7 +66,7 @@
         align-items center
         justify-content space-between
         box-sizing border-box
-        padding  0px 15px
+        padding 0px 15px
         border-bottom 2px solid #eee
         .iconfont
           font-size 50px
@@ -78,8 +84,6 @@
           vertical-align middle
         .right .iconfont
           padding-right 15px
-
-
       .header-bottom
         width 100%
         height 75px
@@ -93,5 +97,12 @@
             font-size 30px
             height 75px
             line-height 75px
+            &.active
+              color: #B4282D;
+              border-bottom: .04rem solid #B4282D;
+              span
+                color: #B4282D;
 
+    .goods-content
+      margin-top 160px
 </style>
