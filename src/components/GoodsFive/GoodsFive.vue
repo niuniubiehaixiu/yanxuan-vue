@@ -29,7 +29,7 @@
         </div>
         <div class="shopContent-show-wrapper">
           <div class="show-left">
-            <div class="content" v-for="(topic,index) in reqshops.topicList" :key="index" v-show="index<10">
+            <div class="content" v-for="(topic,index) in reqshops" :key="index" v-show="index">
               <div class="banner">
                 <img v-lazy="topic.bannerInfo.picUrl"
                      :style="{height:topic.bannerInfo.height<1000? 300 +'px' : 460 +'px'}" alt="">
@@ -50,7 +50,7 @@
 
           </div>
           <div class="show-right">
-            <div class="content"  v-for="(topic,index) in reqshops.topicList" :key="index" v-show="index>=10">
+            <div class="content"  v-for="(topic,index) in reqshops" :key="index" v-show="index + '-label'">
               <div class="banner">
                 <img v-lazy="topic.bannerInfo.picUrl"
                      :style="{height:topic.bannerInfo.height<1000? 300 +'px' : 460 +'px'}"
@@ -81,7 +81,6 @@
   export default {
 
     mounted(){
-      this.$store.dispatch('getshops')
       this.$store.dispatch('getlist', ()=>{
         this.$nextTick(()=>{
           new Swiper('.swiper-container', {
@@ -100,11 +99,6 @@
         reqshops:state=>state.goods.reqshops,
         reqlist:state=>state.goods.reqlist
       })
-    },
-    methods:{
-      _initScroll(){
-
-      }
     },
   }
 </script>

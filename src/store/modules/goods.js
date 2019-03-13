@@ -8,7 +8,7 @@ const state = {
   reqRecommendDataTwo: [],//识物数据2
   reqHomes:[],//识物数据HOME
   reqshops:[], //识物晒单数据
-  reqlist:[]
+  reqlist:[],
 }
 
 const mutations = {
@@ -30,12 +30,12 @@ const mutations = {
   },
   //更新shop数据
   [RECRIVE_SHOP] (state,{reqshops}){
-    state.reqshops=reqshops
+    state.reqshops.push(...reqshops.topicList)
   },
   //更新shoplist数据
   [RECRIVE_List] (state,{reqlist}){
     state.reqlist=reqlist
-  }
+  },
 
 }
 
@@ -74,10 +74,11 @@ const actions = {
     }
   },
   //获取识伍页面的晒单数据
-  async getshops ({commit}){
-    const result = await reqshop(1, 20, 1)
+  async getshops ({commit},num){
+    const result = await reqshop(num, 20, 1)
     if (result.code==='200'){
       const reqshops = result.data
+
       commit(RECRIVE_SHOP,{reqshops})
     }
   },

@@ -59,6 +59,7 @@
       height 160px
       background #fff
       position fixed
+      z-index 99
       .header-top
         width 100%
         height 85px
